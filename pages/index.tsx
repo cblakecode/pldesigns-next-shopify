@@ -10,8 +10,8 @@ export default function Home() {
         <meta></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="">
-        <main className="relative grid w-full grid-flow-row">
+      <div className="grid grid-flow-row grid-cols-8">
+        <main className="relative col-span-full grid w-full grid-flow-row grid-cols-8">
           <Navbar />
           <Hero />
         </main>

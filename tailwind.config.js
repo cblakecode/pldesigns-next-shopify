@@ -36,6 +36,7 @@ module.exports = {
           900: "#080608",
         },
         "common-light": "#fffbff",
+        "common-text": "#736E5F",
       },
     },
   },
