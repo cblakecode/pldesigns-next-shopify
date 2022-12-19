@@ -1,10 +1,9 @@
 import "@shopify/shopify-api/adapters/node";
 import { shopifyApi, LATEST_API_VERSION } from "@shopify/shopify-api";
-import { QueryTypes } from "./types";
+import { Collections } from "./types";
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN!;
 const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN!;
-// const URL = `https://${domain}/api/2022-10/graphql.json`;
 
 const shopify = shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY!,
@@ -21,42 +20,48 @@ export const client = new shopify.clients.Storefront({
 });
 
 export const getProducts = client
-  .query<QueryTypes>({
+  .query<Collections>({
     data: `{
-          products(first: 3) {
-            edges {
-              node {
-                id
-                title
-                description
-                handle
-                variants(first: 1) {
-                  edges {
-                    cursor
-                    node {
-                      price {
-                        amount
+      collections(first: 1) {
+        edges {
+          node {
+            handle
+            title
+            products(first: 4) {
+              edges {
+                node {
+                  id
+                  title
+                  description
+                  handle
+                  variants(first: 1) {
+                    edges {
+                      node {
+                        quantityAvailable
+                        price {
+                          amount
+                        }
                       }
                     }
                   }
-                }
-                images (first: 1) {
-                  edges {
-                    node {
-                      url
-                      altText
+                  images(first: 1) {
+                    edges {
+                      node {
+                        url
+                        altText
+                      }
                     }
                   }
                 }
               }
             }
           }
-        }`,
+        }
+      }
+    }`,
   })
   .then(
     (response) => {
-      console.log(response.body.data?.products);
-
       const { data } = response.body;
 
       return data;

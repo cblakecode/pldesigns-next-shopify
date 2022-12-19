@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-common-light scrollbar-thumb-rounded hover:scrollbar-thumb-slate-300">
+        <body className=" bg-common-light scrollbar-thin scrollbar-track-transparent scrollbar-thumb-common-light scrollbar-thumb-rounded hover:scrollbar-thumb-slate-300">
           <Main />
           <NextScript />
         </body>

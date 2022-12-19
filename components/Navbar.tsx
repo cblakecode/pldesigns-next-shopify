@@ -9,7 +9,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed z-10 col-end-5 grid h-min max-h-min w-full grid-flow-col-dense grid-cols-8 place-content-center bg-transparent px-6 pt-6 text-common-light 2xl:bg-main">
+    <nav className="fixed inset-x-0 top-0 z-10 col-end-5 grid h-min max-h-min w-full grid-flow-col-dense grid-cols-8 place-content-center bg-transparent px-6 pt-6 text-common-light 2xl:bg-main">
       <div className="col-start-1 col-end-5 flex h-full flex-row items-center justify-start pt-6 lg:pt-0">
         <button className="hover:text-main-300">
           <HomeIcon className="w-6" />
