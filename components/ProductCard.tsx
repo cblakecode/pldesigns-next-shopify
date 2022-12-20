@@ -15,7 +15,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({
   description,
 }) => {
   return (
-    <div className="group relative flex h-full w-full flex-col items-center justify-between overflow-hidden rounded-lg text-common-light">
+    <div className="group relative inline-block w-64 flex-shrink-0 snap-center overflow-hidden rounded-lg text-common-light before:content-[''] after:content-['']">
       <div className="relative h-full w-full rounded-lg object-cover">
         <Image src={img?.url} alt={img?.altText} fill />
       </div>

@@ -14,11 +14,11 @@ const Home = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <meta></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="grid gap-x-6 overflow-hidden">
-        <main className="relative col-span-full px-8">
+      <div className="grid w-screen gap-6 overflow-hidden">
+        <main className="relative col-span-full">
           <Navbar />
           <Hero />
-          <section className="flex-column flex h-screen min-h-screen w-full items-center justify-between ">
+          <section className="grid h-screen min-h-screen w-full auto-rows-max">
             {collections.map((collection, index) => {
               return (
                 <ProductSection
