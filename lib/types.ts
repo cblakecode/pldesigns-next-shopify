@@ -18,11 +18,11 @@ export interface Collections {
                 description?: string;
                 handle?: string;
                 variants?: {
-                  edges: [
-                    { cursor: string; node: { price: { amount: number } } }
-                  ];
+                  edges: { node: { price: { amount: number } } }[];
                 };
-                images: { edges: [{ node: { url: string; altText: string } }] };
+                images?: {
+                  edges: { node: { url: string; altText: string } }[];
+                };
               };
             }[];
           };
@@ -45,7 +45,6 @@ export interface Products {
         variants?: {
           edges: {
             node: {
-              quantityAvailable?: number;
               price: {
                 amount: number;
               };

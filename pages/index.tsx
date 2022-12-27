@@ -2,7 +2,7 @@ import Head from "next/head";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import ProductSection from "../components/ProductSection";
-import { getProducts } from "../lib/shopify";
+import { getCollections } from "../lib/shopify";
 import { InferGetStaticPropsType } from "next";
 
 const Home = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -19,14 +19,8 @@ const Home = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <Navbar />
           <Hero />
           <section className="grid h-screen min-h-screen w-full auto-rows-max">
-            {collections.map((collection, index) => {
-              return (
-                <ProductSection
-                  products={collection.node.products}
-                  title={collection.node.title}
-                  key={index}
-                />
-              );
+            {collections.map(({ node }, index) => {
+              return <ProductSection node={node} key={index} />;
             })}
           </section>
         </main>
@@ -36,7 +30,7 @@ const Home = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticProps = async () => {
-  const data = await getProducts;
+  const data = await getCollections;
 
   if (!data) {
     return {

@@ -19,7 +19,7 @@ export const client = new shopify.clients.Storefront({
   storefrontAccessToken,
 });
 
-export const getProducts = client
+export const getCollections = client
   .query<Collections>({
     data: `{
       collections(first: 1) {
