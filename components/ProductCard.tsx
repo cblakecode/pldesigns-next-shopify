@@ -1,35 +1,20 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { QueryType } from "../lib/types";
 
-type PropType = {
-  node: {
-    images?: {
-      edges: {
-        node: { url: string; altText: string };
-      }[];
-    };
-    title?: string;
-    description?: string;
-    id?: string;
-    variants?: {
-      edges: {
-        node: {
-          price: {
-            amount: number;
-          };
-        };
-      }[];
-    };
-  };
-};
-
-const ProductCard = ({ node }: PropType) => {
+const ProductCard = ({
+  node,
+}: {
+  node: QueryType["data"]["collections"]["edges"][0]["node"]["products"]["edges"][0]["node"];
+}) => {
   const router = useRouter();
 
+  console.log(node.images.nodes);
+
   return (
-    <div className="group relative inline-block w-64 flex-shrink-0 snap-center overflow-hidden rounded-lg text-common-light before:content-[''] after:content-['']">
+    <div className="group relative inline-block w-64 flex-shrink-0 snap-center overflow-hidden rounded-lg text-common-light">
       <div className="relative h-full w-full rounded-lg object-cover">
-        {node.images?.edges.map(({ node }, index: number) => {
+        {node.images.nodes.map((node, index: number) => {
           return <Image src={node.url} alt={node.altText} key={index} fill />;
         })}
       </div>
@@ -39,7 +24,7 @@ const ProductCard = ({ node }: PropType) => {
       >
         <h3>{node.title}</h3>
         <p>{node.description}</p>
-        <p className="pb-4">{node.variants?.edges[0].node.price.amount}</p>
+        <p className="pb-4">{node.variants?.nodes[0].price.amount}</p>
       </div>
     </div>
   );

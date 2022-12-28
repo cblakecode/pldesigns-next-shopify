@@ -1,6 +1,6 @@
 import "@shopify/shopify-api/adapters/node";
 import { shopifyApi, LATEST_API_VERSION } from "@shopify/shopify-api";
-import { Collections } from "./types";
+import { QueryType } from "./types";
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN!;
 const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN!;
@@ -19,36 +19,36 @@ export const client = new shopify.clients.Storefront({
   storefrontAccessToken,
 });
 
-export const getCollections = client
-  .query<Collections>({
-    data: `{
-      collections(first: 1) {
-        edges {
-          node {
-            handle
-            title
-            products(first: 4) {
-              edges {
-                node {
-                  id
-                  title
-                  description
-                  handle
-                  variants(first: 1) {
-                    edges {
-                      node {
-                        quantityAvailable
+export const getCollections = async (): Promise<
+  QueryType["data"] | undefined
+> => {
+  try {
+    const response = await client.query<QueryType>({
+      data: `{
+        collections(first: 3) {
+          edges {
+            node {
+              id
+              title
+              handle
+              products(first: 5) {
+                edges {
+                  node {
+                    id
+                    title
+                    description
+                    handle
+                    images(first: 3) {
+                      nodes {
+                        url
+                        altText
+                      }
+                    }
+                    variants(first: 3) {
+                      nodes {
                         price {
                           amount
                         }
-                      }
-                    }
-                  }
-                  images(first: 1) {
-                    edges {
-                      node {
-                        url
-                        altText
                       }
                     }
                   }
@@ -57,14 +57,12 @@ export const getCollections = client
             }
           }
         }
-      }
-    }`,
-  })
-  .then(
-    (response) => {
-      const { data } = response.body;
+      }`,
+    });
 
-      return data;
-    },
-    (reason) => console.error(reason.response)
-  );
+    return response.body.data;
+  } catch (error: any) {
+    console.error(error.response);
+    return error.response;
+  }
+};

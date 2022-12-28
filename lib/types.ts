@@ -1,27 +1,25 @@
-export interface QueryTypes {
-  data?: { [key: string]: unknown | string };
-  query?: { [key: string]: string | number };
-}
-
-export interface Collections {
+export interface QueryType {
   data: {
-    collections: {
+    [key: string]: {
+      title: string;
+      id: string;
+      handle: string;
       edges: {
         node: {
           handle?: string;
-          title?: string;
+          title: string;
           products: {
             edges: {
               node: {
                 id?: string;
-                title?: string;
-                description?: string;
+                title: string;
+                description: string;
                 handle?: string;
                 variants?: {
-                  edges: { node: { price: { amount: number } } }[];
+                  nodes: { price: { amount: string } }[];
                 };
-                images?: {
-                  edges: { node: { url: string; altText: string } }[];
+                images: {
+                  nodes: { url: string; altText: string }[];
                 };
               };
             }[];
@@ -32,34 +30,34 @@ export interface Collections {
   };
 }
 
-export interface Products {
-  handle?: string;
-  title?: string;
-  products: {
-    edges: {
-      node: {
-        id?: string;
-        title?: string;
-        description?: string;
-        handle?: string;
-        variants?: {
-          edges: {
-            node: {
-              price: {
-                amount: number;
-              };
-            };
-          }[];
-        };
-        images: {
-          edges: {
-            node: {
-              url: string;
-              altText: string;
-            };
-          }[];
-        };
-      };
-    }[];
-  };
-}
+// export interface Products {
+//   handle?: string;
+//   title?: string;
+//   products: {
+//     edges: {
+//       node: {
+//         id?: string;
+//         title?: string;
+//         description?: string;
+//         handle?: string;
+//         variants?: {
+//           edges: {
+//             node: {
+//               price: {
+//                 amount: number;
+//               };
+//             };
+//           }[];
+//         };
+//         images: {
+//           edges: {
+//             node: {
+//               url: string;
+//               altText: string;
+//             };
+//           }[];
+//         };
+//       };
+//     }[];
+//   };
+// }

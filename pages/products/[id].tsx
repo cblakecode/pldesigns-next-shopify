@@ -71,17 +71,19 @@ const ProductPage = ({
       <div className="flex h-full w-1/2 flex-col items-center justify-around gap-4">
         <h3 className="text-8xl ">{product.title}</h3>
         <p className="">{product.description}</p>
-        <p className="text-3xl">${product.variants?.nodes[0].price.amount}</p>
         {product.variants?.nodes.map((variant: Variant, index: number) => {
           <div key={index}>
             <label htmlFor={variant.selectedOptions[0].name}></label>
             <input type="checkbox" name={variant.selectedOptions[0].name} />
           </div>;
         })}
-        <button className="flex min-w-max items-center justify-center rounded-lg bg-main px-8 py-4 text-common-light shadow-sm">
-          Add To Cart
-          <PlusIcon className="h-6 w-6" />
-        </button>
+        <div className="flex w-full flex-row items-center justify-around">
+          <p className="text-3xl">${product.variants?.nodes[0].price.amount}</p>
+          <button className="flex min-w-max items-center justify-center rounded-lg bg-main px-8 py-4 text-common-light shadow-sm">
+            Add To Cart
+            <PlusIcon className="h-6 w-6" />
+          </button>
+        </div>
       </div>
     </div>
   );

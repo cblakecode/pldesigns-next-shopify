@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ShoppingCartIcon, HomeIcon } from "@heroicons/react/24/outline";
 import SearchInput from "./SearchInput";
 import ShoppingCart from "./ShoppingCart";
+import Link from "next/link";
 
 const navList: string[] = ["About", "Contact", "Shop", "Legal"];
 
@@ -9,11 +10,11 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-10 col-end-5 grid h-min max-h-min w-full grid-flow-col-dense grid-cols-8 place-content-center bg-transparent px-6 pt-6 text-common-light 2xl:bg-main">
+    <nav className="py-auto sticky inset-x-0 top-0 z-10 col-end-5 grid h-20 w-full grid-flow-col-dense grid-cols-8 place-content-center place-items-center bg-main text-common-light">
       <div className="col-start-1 col-end-5 flex h-full flex-row items-center justify-start pt-6 lg:pt-0">
-        <button className="hover:text-main-300">
+        <Link className="hover:text-main-300" href={"/"}>
           <HomeIcon className="w-6" />
-        </button>
+        </Link>
         <ul className="hidden flex-row lg:flex">
           {navList.map((item, index) => {
             return (
